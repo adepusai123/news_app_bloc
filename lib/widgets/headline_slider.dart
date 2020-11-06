@@ -25,7 +25,6 @@ class _HeadlineSliderWidgetState extends State<HeadlineSliderWidget> {
       stream: getTopHeadlinesBloc.subject.stream,
       builder: (context, AsyncSnapshot<ArticleResponse> snapshot) {
         if (snapshot.hasData) {
-          print('-------------------------------- hasData');
           if (snapshot.data.error != null && snapshot.data.error.length > 0) {
             return buildErrorWidget(snapshot.data.error);
           }
@@ -40,7 +39,6 @@ class _HeadlineSliderWidgetState extends State<HeadlineSliderWidget> {
   }
 
   Widget _buildHeadlineSlider(ArticleResponse data) {
-    print('----------- BuildHeadlineSlider');
     List<ArticleModel> articles = data.articles;
     return Container(
       child: CarouselSlider(
@@ -135,7 +133,6 @@ class _HeadlineSliderWidgetState extends State<HeadlineSliderWidget> {
   }
 
   String timeAgo(DateTime date) {
-    print('------------- DAte $date');
     return timeago.format(date, allowFromNow: true, locale: 'en');
   }
 }

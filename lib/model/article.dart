@@ -22,7 +22,7 @@ class ArticleModel {
   String content;
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
-        source: SourceModel.fromJson(json["source"]),
+        source: SourceModel.fromJson(json["name"]),
         author: json["author"],
         title: json["title"],
         description: json["description"] == null ? null : json["description"],
