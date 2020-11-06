@@ -1,20 +1,45 @@
-class ArticleModel {
-  final String author;
-  final String title;
-  final String description;
-  final String url;
-  final String img;
-  final String date;
-  final String content;
-  ArticleModel(this.author, this.title, this.description, this.url, this.img,
-      this.date, this.content);
+import 'package:news_app_bloc/model/source.dart';
 
-  ArticleModel.fromJson(Map<String, dynamic> json)
-      : author = json["author"],
-        title = json["title"],
-        description = json["description"],
-        url = json["url"],
-        img = json["urlToImage"],
-        date = json["date"],
-        content = json["content"];
+class ArticleModel {
+  ArticleModel({
+    this.source,
+    this.author,
+    this.title,
+    this.description,
+    this.url,
+    this.urlToImage,
+    this.publishedAt,
+    this.content,
+  });
+
+  SourceModel source;
+  String author;
+  String title;
+  String description;
+  String url;
+  String urlToImage;
+  DateTime publishedAt;
+  String content;
+
+  factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
+        source: SourceModel.fromJson(json["source"]),
+        author: json["author"],
+        title: json["title"],
+        description: json["description"] == null ? null : json["description"],
+        url: json["url"],
+        urlToImage: json["urlToImage"],
+        publishedAt: DateTime.parse(json["publishedAt"]),
+        content: json["content"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "source": source.toJson(),
+        "author": author,
+        "title": title,
+        "description": description == null ? null : description,
+        "url": url,
+        "urlToImage": urlToImage,
+        "publishedAt": publishedAt.toIso8601String(),
+        "content": content,
+      };
 }

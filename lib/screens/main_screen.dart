@@ -1,7 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/style.dart';
 import 'package:news_app_bloc/bloc/bottom_navbar_bloc.dart';
+import 'package:news_app_bloc/screens/tabs/home_screen.dart';
 import 'package:news_app_bloc/style/theme.dart' as Style;
 
 class MainScreen extends StatefulWidget {
@@ -40,13 +40,13 @@ class _MainScreenState extends State<MainScreen> {
           builder: (BuildContext context, AsyncSnapshot<NavBarItem> snapshot) {
             switch (snapshot.data) {
               case NavBarItem.HOME:
-                return testScreen();
+                return HomeScreen();
                 break;
               case NavBarItem.SOURCES:
-                return testScreen();
+                return testScreen('SOURCES');
                 break;
               case NavBarItem.SEARCH:
-                return testScreen();
+                return testScreen('SEARCH');
                 break;
               default:
             }
@@ -87,26 +87,17 @@ class _MainScreenState extends State<MainScreen> {
                 onTap: _bottomNavBarBloc.pickItem,
                 items: [
                   BottomNavigationBarItem(
-                    title: Padding(
-                      padding: EdgeInsets.only(top: 5.0),
-                      child: Text("Home"),
-                    ),
+                    label: "HOME",
                     icon: Icon(EvaIcons.homeOutline),
                     activeIcon: Icon(EvaIcons.home),
                   ),
                   BottomNavigationBarItem(
-                    title: Padding(
-                      padding: EdgeInsets.only(top: 5.0),
-                      child: Text("Sources"),
-                    ),
+                    label: "Sources",
                     icon: Icon(EvaIcons.gridOutline),
                     activeIcon: Icon(EvaIcons.grid),
                   ),
                   BottomNavigationBarItem(
-                    title: Padding(
-                      padding: EdgeInsets.only(top: 5.0),
-                      child: Text("Search"),
-                    ),
+                    label: "Search",
                     icon: Icon(EvaIcons.searchOutline),
                     activeIcon: Icon(EvaIcons.search),
                   )
@@ -119,7 +110,7 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget testScreen() {
+  Widget testScreen(title) {
     Size size = MediaQuery.of(context).size;
     return Container(
       color: Colors.white,
@@ -128,7 +119,7 @@ class _MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Test Screen"),
+          Text("$title Screen"),
         ],
       ),
     );
